@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+var fs= require('fs'); 
+var schedule = require("node-schedule");
+
 // 中央数据
 global.golddata = [
 	{
@@ -418,6 +421,20 @@ global.golddata = [
 		"evaluatename": "",
 		"score": 0,
 		"info":""
+	},{
+		"name":"卢帅",
+		"status": -1,
+		"scoretext":"",
+		"evaluatename": "",
+		"score": 0,
+		"info":"跳的，相当跳的"
+	},{
+		"name":"杨翼飞",
+		"status": -1,
+		"scoretext":"",
+		"evaluatename": "",
+		"score": 0,
+		"info":""
 	}
 ];
 
@@ -462,13 +479,38 @@ router.get('/adminpage', function(req, res, next) {
 
 /*更改评分数据*/
 router.post('/admin/send', function(req, res, next) {
-	  var id = req.body.id;
-	  var score = req.body.score;
-	  var text = req.body.text;
-	  golddata[id].score = score;
-	  golddata[id].scoretext = text;
-	  golddata[id].evaluatename = req.session.username;
-	  res.json({'satus':200});
+	  if(!req.session.username) {
+	  	 res.json({'satus':100});
+	  }else {
+	  	  var id = req.body.id;
+		  var score = req.body.score;
+		  var text = req.body.text;
+		  golddata[id].score = score;
+		  golddata[id].scoretext = text;
+		  golddata[id].evaluatename = req.session.username;
+		  writefile();
+		  res.json({'satus':200});
+	  }
 });
+
+
+var filelock = true;
+
+//定时执行任务防止服务器宕机
+function writefile() {
+	if(filelock) {
+		var jsonstr = JSON.stringify(golddata);
+		var time = +new Date()
+		var henline = "";
+		for(var i =0;i<100;i++) {
+			henline = henline + "-";
+		}
+		var endstr = jsonstr+henline+time+henline;
+		filelock = false;
+		fs.writeFile("../user.txt", endstr,function(data){
+			filelock = true;
+		})
+	}
+}
 
 module.exports = router;

@@ -84,7 +84,7 @@
 	     	<td width="20%">编号</td>
 	     	<td width="25%">姓名</td>
 	     	<td width="25%">状态</td>
-	     	<td width="30%">操作</td>
+	     	<td width="30%">签到</td>
 	     </tr>
 		<%for(var i=0; i<alldata.length;i++){
 			if(alldata[i].status==-1){
@@ -145,9 +145,15 @@
 								$(_this).parents('tr').find(".text").text("已签到")
 							},1000)
 						}else {
-							$(this).parents('tr').removeclass('active');
-							$(this).removeclass('activeno');
+							$(_this).parents('tr').removeClass('active');
+							$(_this).removeClass('activeno');
 						}
+					})
+					.fail(function(data) {
+						console.log($(_this).parents('tr'))
+						$(_this).parents('tr').removeClass('active');
+						$(_this).removeClass('activeno');
+						alert("网断了。找ceo")
 					})
 				}
 			})
