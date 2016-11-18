@@ -45,28 +45,51 @@
             z-index: 11;
             display: none;
         }
-        .alert-wrap {
+        .alert-wrap{
+            /*display: none;*/
+            border-radius: 20px;
+            border: 2px solid #00B38C;
+            box-shadow: 0 0 10px 1px #00B38C;
+            padding: 20px;
+            padding-top: 0;
             transform:scale(0);
-            width:50%;
+            width:90%;
             position: absolute;
             top: 50%;
             left: 50%;
             -webkit-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
             text-align: center;
-            background-color: #ddd;
+            background-color: #00d1a6;
         }
         .alert-wrap p{
             margin-top: 20px;
             color: #5bc0de;
         }
-        .alert-wrap-1{
-
-        }
         .score-hd{
-            height: 200px;
+            overflow: hidden;
+            margin-bottom: 15px;
         }
-
+        .score-hd input{
+            height: 40px;
+            line-height: 40px;
+            width: 60%;
+            float: right;
+            font-size: 24px;
+            outline: none;
+            border: none;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .score-hd span{
+            line-height: 40px;
+            float: left;
+            margin-top: 0px;
+            font-size: 30px;
+            color: #0080b3;
+            text-align: center;
+            font-weight: bolder;
+        }
         .btnqiandao,.btnpinglun{
             position: relative;
             display: inline-block;
@@ -95,7 +118,47 @@
         p {
             margin: 0px;
         }
-
+        .btn-score{
+            border-radius: 10px;
+            margin: 0 auto;
+            height:40px;
+            background-color: #fff266;
+            text-align: center;
+            line-height: 40px;
+            font-size: 25px;
+            border:1px solid #ffd85f;
+        }
+        .comment span{
+            float: left;
+            font-size: 30px;
+            color: #0080b3;
+            font-weight: bolder;
+        }
+        .comment textarea{
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            font-size: 24px;
+            height: 200px;
+        }
+        .comment{
+            margin-bottom: 15px;
+        }
+        .score-close{
+            position: relative;
+            top: 0;
+            right: -10px;
+            overflow: hidden;
+            color: #ddd;
+            font-size: 22px;
+        }
+        .score-close span{
+            float: right;
+        }
+        .alert-wrap-1{
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -106,7 +169,7 @@
             <td width="25%">姓名</td>
             <td width="25%">状态</td>
             <td width="10%">评分</td>
-            <td width="20%">评论</td>
+            <td width="20%">结果</td>
         </tr>
         <% for(var i=0; i<alldata.length;i++) {
             if(alldata[i].status==-1) {
@@ -147,34 +210,70 @@
 </div>
 <div class="alert-box">
     <div class="alert-wrap alert_ok">
+           <div class="score-close"><span id="btn-close">X</span></div>
            <div class="score-hd">
-               <span>分数</span>
-               <input type="text" id="score">
+               <span>分数:</span>
+               <input type="text" id="score" maxlength="3">
            </div>
+            <div class="comment">
+                <span>评语:</span>
+                <textarea name="" id="" cols="30" rows="10"></textarea>
+            </div>
+            <div class="btn-score">
+                提交
+            </div>
     </div>
 </div>
 <div class="alert-box-1">
-    <div class="alert-wrap-1">
+    <div class="alert-wrap alert_ok">
+        <div class="score-close"><span id="btn-close">X</span></div>
+        <div class="score-hd">
+        <span>分数:</span>
+        <input type="text" id="score" maxlength="3">
+        </div>
+        <div class="comment">
+        <span>评语:</span>
+        <textarea name="" id="" cols="30" rows="10"></textarea>
+        </div>
+        <div class="btn-score">
+        提交
+        </div>
     </div>
 </div>
+
+
 <div class="footer">
     2016-11-19@版权所有-树莓fe
 </div>
 <script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.js"></script>
 <script>
     $(function(){
-        //打分
         $(".table").on("click",".btnqiandao",function(){
 
             if($(this).parent().siblings('.text').html() == '未签到'){
                return;
             }
-            $(".alert-box").slideDown(100);
+
+            $(".alert-box").slideDown(400);
         })
 
-        //评论
-        $('.table').on('click','.btnpinglun',function () {
+        //关闭评分框
+        $('.alert-box').on('click','#btn-close',function () {
+            $(".alert-box").slideUp(400);
+        })
 
+        //打开结果框
+        $('.table').on('click','.btnpinglun',function () {
+            if($(this).parent().siblings('.text').html() == '未签到'){
+                return;
+            }
+            $(".alert-box-1").slideDown(400);
+        })
+
+        //关闭查看结果
+        $('.alert-box').on('click','#btn-close',function () {
+            console.log(213)
+            $(".alert-box-1").slideUp(400);
         })
     })
 </script>
