@@ -47,9 +47,6 @@
         }
         .alert-wrap{
             /*display: none;*/
-            border-radius: 20px;
-            border: 2px solid #00B38C;
-            box-shadow: 0 0 10px 1px #00B38C;
             padding: 20px;
             padding-top: 0;
             transform:scale(0);
@@ -60,35 +57,10 @@
             -webkit-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
             text-align: center;
-            background-color: #00d1a6;
         }
         .alert-wrap p{
             margin-top: 20px;
             color: #5bc0de;
-        }
-        .score-hd{
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-        .score-hd input{
-            height: 40px;
-            line-height: 40px;
-            width: 60%;
-            float: right;
-            font-size: 24px;
-            outline: none;
-            border: none;
-            text-align: center;
-            border-radius: 5px;
-        }
-        .score-hd span{
-            line-height: 40px;
-            float: left;
-            margin-top: 0px;
-            font-size: 30px;
-            color: #0080b3;
-            text-align: center;
-            font-weight: bolder;
         }
         .btnqiandao,.btnpinglun{
             position: relative;
@@ -129,7 +101,7 @@
             border:1px solid #ffd85f;
             width: 100%;
         }
-        .comment span,.beizhu .beizhufont{
+        .comment span,.beizhu .beizhufont,.resbox .theme{
             float: left;
             font-size: 30px;
             color: #0080b3;
@@ -146,27 +118,38 @@
         .comment{
             margin-bottom: 15px;
         }
-        .score-close{
+        .score-hd{
             position: relative;
-            top: 0;
-            right: -10px;
-            overflow: hidden;
-            color: #ddd;
-            font-size: 22px;
         }
-        .score-close span{
-            float: right;
+        .score-hd img{
+            width: 100%;
+            height: 50px;
         }
-        .beizhu,.beizhuipt{
+        .score-close{
+            position: absolute;
+            right: 10px;
+            top: 17px;
+        }
+        .score-close img{
+            position: absolute;
+            right: 0;
+            top: 5px;
+            width: 23px;
+            height: 23px;
+        }
+        .score-container{
+            background-color: #fff;
+            padding: 0 10px;
+            bo
+        }
+
+        .beizhu{
             overflow: hidden;
         }
         .beizhuipt input{
             float: left;
             width: 100%;
             text-align: left;
-        }
-        .resbox{
-            height:100px;
         }
         .beizhu .beizhucontent{
             font-size: 24px;
@@ -178,6 +161,18 @@
             margin-top: 0;
             text-align: left;
             float: none;
+        }
+        .resbox .score{
+            overflow: hidden;
+        }
+        .resbox .status{
+            overflow: hidden;
+        }
+        .resbox .theme{
+
+        }
+        .resbox .resscore{
+            color: #fff;
         }
     </style>
 </head>
@@ -228,19 +223,16 @@
         }%>
     </table>
 </div>
-<div class="alert-box">
+<div class="alert-box" style="display: block">
     <div class="alert-wrap alert_ok">
-           <div class="score-close"><span id="btn-close">X</span></div>
-           <div class="score-hd">
-               <span>分数:</span>
-               <input type="text" id="score" maxlength="3">
-           </div>
-            <div class="comment">
-                <span>评语:</span>
-                <textarea id="text" cols="30" rows="10"></textarea>
-            </div>
-            <div class="btn-score">
-                提交
+           <div class="score-box">
+               <div class="score-hd">
+                   <img src="/img/score-hd.jpg" alt="">
+                   <div class="score-close"><img src="/img/close.png" alt=""></div>
+               </div>
+               <div class="score-container">
+                   <div class="score-content"></div>
+               </div>
             </div>
     </div>
 </div>
@@ -252,9 +244,9 @@
         <p class="beizhucontent">很跳的</p>
         </div>
         <div class="comment">
-        <span>结果:</span>
         <div class="resbox">
-
+            <p class="score"><span class="theme">分数:</span><span class="resscore">100</span></p>
+            <p class="status"><span class="theme">状态:</span><span id="resstatus">技术可以,态度还行</span></p>
         </div>
         </div>
     </div>
@@ -267,7 +259,7 @@
 <script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.js"></script>
 <script>
     $(function(){
-        var golddata;
+        var golddata = null;
         $.ajax({
             url: '/adminpagedata',
             type: 'GET',
