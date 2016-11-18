@@ -70,7 +70,7 @@
             overflow: hidden;
             margin-bottom: 15px;
         }
-        .score-hd input,.beizhu input{
+        .score-hd input{
             height: 40px;
             line-height: 40px;
             width: 60%;
@@ -129,7 +129,7 @@
             border:1px solid #ffd85f;
             width: 100%;
         }
-        .comment span{
+        .comment span,.beizhu .beizhufont{
             float: left;
             font-size: 30px;
             color: #0080b3;
@@ -157,13 +157,27 @@
         .score-close span{
             float: right;
         }
-        .beizhu{
+        .beizhu,.beizhuipt{
             overflow: hidden;
         }
-        .beizhu span{
+        .beizhuipt input{
             float: left;
-            font-size: 30px;
-            color: #0080b3;
+            width: 100%;
+            text-align: left;
+        }
+        .resbox{
+            height:100px;
+        }
+        .beizhu .beizhucontent{
+            font-size: 24px;
+            color: #fff;
+            margin-top: 0;
+            text-align: left;
+        }
+        .beizhu .beizhufont{
+            margin-top: 0;
+            text-align: left;
+            float: none;
         }
     </style>
 </head>
@@ -234,17 +248,15 @@
     <div class="alert-wrap alert_ok">
         <div class="score-close"><span id="btn-close">X</span></div>
         <div class="beizhu">
-        <span>备注:</span>
-        <input type="text" id="score" maxlength="3">
+        <p class="beizhufont">备注:</p>
+        <p class="beizhucontent">很跳的</p>
         </div>
         <div class="comment">
-        <span>评语:</span>
-        <textarea name="" id="" cols="30" rows="10"></textarea>
-        </div>
-        <div class="btn-score">
-        提交
-        </div>
+        <span>结果:</span>
+        <div class="resbox">
 
+        </div>
+        </div>
     </div>
 </div>
 
