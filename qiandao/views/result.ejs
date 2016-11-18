@@ -50,6 +50,7 @@
             border: 2px solid #00B38C;
             box-shadow: 0 0 10px 1px #00B38C;
             padding: 20px;
+            padding-top: 0;
             transform:scale(0);
             width:90%;
             position: absolute;
@@ -143,6 +144,17 @@
         .comment{
             margin-bottom: 15px;
         }
+        .score-title{
+            position: relative;
+            top: 0;
+            right: -10px;
+            overflow: hidden;
+            color: #ddd;
+            font-size: 22px;
+        }
+        .score-title span{
+            float: right;
+        }
     </style>
 </head>
 <body>
@@ -153,7 +165,7 @@
             <td width="25%">姓名</td>
             <td width="25%">状态</td>
             <td width="10%">评分</td>
-            <td width="20%">评论</td>
+            <td width="20%">结果</td>
         </tr>
         <%for(var i=0; i<alldata.length;i++){
         if(alldata[i].status==-1){
@@ -169,7 +181,7 @@
             </td>
             <td>
                 <div class="btnpinglun activeno">
-                    评论
+                    查看结果
                 </div>
             </td>
         </tr>
@@ -185,7 +197,7 @@
             </td>
             <td>
                 <div class="btnpinglun">
-                    评论
+                    查看结果
                 </div>
             </td>
         </tr>
@@ -196,6 +208,7 @@
 </div>
 <div class="alert-box">
     <div class="alert-wrap alert_ok">
+           <div class="score-title"><span>X</span></div>
            <div class="score-hd">
                <span>分数:</span>
                <input type="text" id="score" maxlength="3">
