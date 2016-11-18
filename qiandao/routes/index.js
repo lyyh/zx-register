@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 // 中央数据
-var golddata = [
+global.golddata = [
 	{
 		"name":"唐万锂",
 		"status": -1,
@@ -378,5 +378,6 @@ router.post('/user', function(req, res, next) {
   golddata[id].status = 0;
   res.json({'satus':200});
 });
+
 
 module.exports = router;
