@@ -108,42 +108,40 @@
             <td width="10%">评分</td>
             <td width="20%">评论</td>
         </tr>
-        <%for(var i=0; i<alldata.length;i++){
-        if(alldata[i].status==-1){
-        %>
-        <tr dataid = <%= i%>>n
-            <td><%= i%></td>
-            <td><%= alldata[i].name%></td>
-            <td class="text">未签到</td>
-            <td>
-                <div  class="btnqiandao activeno">
-                    打分
-                </div>
-            </td>
-            <td>
-                <div class="btnpinglun activeno">
-                    评论
-                </div>
-            </td>
-        </tr>
-        <%
-        }else {
-        %>
-        <tr class='active'>
-            <td><%= i%></td>
-            <td><%= alldata[i].name%></td>
-            <td class="text">已签到</td>
-            <td>
-                <p   class="btnqiandao">打分</p>
-            </td>
-            <td>
-                <div class="btnpinglun">
-                    评论
-                </div>
-            </td>
-        </tr>
-        <%
-        }
+        <% for(var i=0; i<alldata.length;i++) {
+            if(alldata[i].status==-1) {
+                 %><tr dataid = <%= i%>>
+                    <td><%= i%></td>
+                    <td><%= alldata[i].name%></td>
+                    <td class="text">未签到</td>
+                    <td>
+                        <div  class="btnqiandao activeno">
+                            打分
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btnpinglun activeno">
+                            评论
+                        </div>
+                    </td>
+                </tr><%
+            }else {
+                %>
+                <tr class='active'>
+                    <td><%= i%></td>
+                    <td><%= alldata[i].name%></td>
+                    <td class="text">已签到</td>
+                    <td>
+                        <p   class="btnqiandao">打分</p>
+                    </td>
+                    <td>
+                        <div class="btnpinglun">
+                            评论
+                        </div>
+                    </td>
+                </tr>
+                <%
+            }
         }%>
     </table>
 </div>
@@ -164,9 +162,7 @@
 </div>
 <script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.js"></script>
 <script>
-
     $(function(){
-
         //打分
         $(".table").on("click",".btnqiandao",function(){
 
