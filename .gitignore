@@ -1,0 +1,4 @@
+## 忽略文件
+test
+node_modulue
+dist
