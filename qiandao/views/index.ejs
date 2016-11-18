@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>树莓面试签到</title>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<style>
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+		.table {
+			text-align: center;
+			font-size: 12px;
+		}
+		td {
+			vertical-align: inherit !important;
+		}
+		.header {
+			background-color: #00B38C;
+			color: #fff;
+		}
+		.table-responsive {
+			border:0px;
+			padding-bottom: 20px;
+		}
+		.footer {
+			position: fixed;
+			bottom: 0px;
+			width: 100%;
+			line-height: 30px;
+			text-align: center;
+			background-color: #eee;
+			font-size: 12px;
+			color: #A2B4BA;
+		}
+		.alert-box {
+			width: 100%;
+			height: 100%;
+			position:fixed;
+			top: 0px;
+			left: 0px;
+			z-index: 11;
+			display: none;
+		}
+		.alert-wrap {
+			transform:scale(0)
+			width:50%;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			-webkit-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+			text-align: center;
+		}
+		.alert-wrap p{
+			margin-top: 20px;
+			color: #5bc0de;
+		}
+		.btnqiandao {
+			display: inline-block;
+			padding: 5px 10px;
+		    font-size: 12px;
+		    line-height: 1.5;
+		    border-radius: 3px;
+		    color: #fff;
+		    background-color: #5bc0de;
+		    border-color: #46b8da;
+		}
+		.activeno {
+			background-color: #eee;
+			border-color: #eee;
+		}
+		p {
+		     margin: 0px;
+		}
+		
+	</style>
+</head>
+<body>
+	<div class="table-responsive">
+	  <table class="table">
+	     <tr class="header">
+	     	<td width="20%">编号</td>
+	     	<td width="25%">姓名</td>
+	     	<td width="25%">状态</td>
+	     	<td width="30%">操作</td>
+	     </tr>
+		<%for(var i=0; i<alldata.length;i++){
+			if(alldata[i].status==-1){
+				%>
+				  <tr dataid = <%= i%>>
+				     	<td><%= i%></td>
+				     	<td><%= alldata[i].name%></td>
+				     	<td class="text">未签到</td>
+				     	<td>
+				     		<div  class="btnqiandao">签到</div>
+				     	</td>
+				    </tr>
+				<%
+			}else {
+				%>
+					<tr class='active'>
+				     	<td><%= i%></td>
+				     	<td><%= alldata[i].name%></td>
+				     	<td class="text">已签到</td>
+				     	<td>
+				     		<p   class="btnqiandao activeno">签到</p>
+				     	</td>
+				    </tr>
+				<%
+			}
+		}%>
+	  </table>
+	</div>
+	<div class="alert-box ">
+		<div class="alert-wrap alert_ok">
+			<img src="img/ok.png" alt="">
+			<p>签到成功</p>
+		</div>
+	</div>
+	<div class="footer">
+		2016-11-19@版权所有-树莓fe
+	</div>
+	<script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.js"></script>
+	<script>
+		$(function(){
+			$(".table").on("click",".btnqiandao",function(){
+				if(!$(this).parents('tr').hasClass('active')) {
+					var _id = $(this).parents('tr').attr("dataid");
+					$(this).parents('tr').addClass('active');
+					$(this).addClass('activeno');
+					var _this = this;
+					$.ajax({
+						url: '/user',
+						type: 'POST',
+						dataType: 'json',
+						data: {'id': _id},
+					})
+					.done(function(data) {
+						if(data.satus==200) {
+							$(".alert-box").slideDown(400);
+							setTimeout(function(){
+								$(".alert-box").slideUp(400);
+								$(_this).parents('tr').find(".text").text("已签到")
+							},1000)
+						}else {
+							$(this).parents('tr').removeclass('active');
+							$(this).removeclass('activeno');
+						}
+					})
+				}
+			})
+		})
+	</script>
+</body>
+</html>
