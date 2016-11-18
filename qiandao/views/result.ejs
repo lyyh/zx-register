@@ -127,8 +127,9 @@
             line-height: 40px;
             font-size: 25px;
             border:1px solid #ffd85f;
+            width: 100%;
         }
-        .comment span{
+        .comment span,.beizhu .beizhufont{
             float: left;
             font-size: 30px;
             color: #0080b3;
@@ -156,8 +157,27 @@
         .score-close span{
             float: right;
         }
-        .alert-wrap-1{
-            display: none;
+        .beizhu,.beizhuipt{
+            overflow: hidden;
+        }
+        .beizhuipt input{
+            float: left;
+            width: 100%;
+            text-align: left;
+        }
+        .resbox{
+            height:100px;
+        }
+        .beizhu .beizhucontent{
+            font-size: 24px;
+            color: #fff;
+            margin-top: 0;
+            text-align: left;
+        }
+        .beizhu .beizhufont{
+            margin-top: 0;
+            text-align: left;
+            float: none;
         }
     </style>
 </head>
@@ -184,13 +204,13 @@
                     </td>
                     <td>
                         <div class="btnpinglun activeno">
-                            评论
+                            查看结果
                         </div>
                     </td>
                 </tr><%
             }else {
                 %>
-                <tr class='active'>
+                <tr class='active' dataid= <%= i%>>
                     <td><%= i%></td>
                     <td><%= alldata[i].name%></td>
                     <td class="text">已签到</td>
@@ -199,7 +219,7 @@
                     </td>
                     <td>
                         <div class="btnpinglun">
-                            评论
+                            查看结果
                         </div>
                     </td>
                 </tr>
@@ -217,26 +237,25 @@
            </div>
             <div class="comment">
                 <span>评语:</span>
-                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <textarea id="text" cols="30" rows="10"></textarea>
             </div>
             <div class="btn-score">
                 提交
             </div>
     </div>
 </div>
-<div class="alert-box-1">
+<div class="alert-box-1" style="display: none">
     <div class="alert-wrap alert_ok">
         <div class="score-close"><span id="btn-close">X</span></div>
-        <div class="score-hd">
-        <span>分数:</span>
-        <input type="text" id="score" maxlength="3">
+        <div class="beizhu">
+        <p class="beizhufont">备注:</p>
+        <p class="beizhucontent">很跳的</p>
         </div>
         <div class="comment">
-        <span>评语:</span>
-        <textarea name="" id="" cols="30" rows="10"></textarea>
+        <span>结果:</span>
+        <div class="resbox">
+
         </div>
-        <div class="btn-score">
-        提交
         </div>
     </div>
 </div>
@@ -248,13 +267,46 @@
 <script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.js"></script>
 <script>
     $(function(){
-        $(".table").on("click",".btnqiandao",function(){
+        var golddata;
+        $.ajax({
+            url: '/adminpagedata',
+            type: 'GET',
+            dataType: 'json'
+        })
+        .done(function(data) {
+            golddata = data.alldata;
+        })
 
+        var currentId = null;
+
+        $(".table").on("click",".btnqiandao",function(){
             if($(this).parent().siblings('.text').html() == '未签到'){
                return;
             }
-
+            currentId = $(this).parent().parent().find('td:eq(0)').html();
             $(".alert-box").slideDown(400);
+        })
+
+        //提交面试结果
+        $('.btn-score').click(function () {
+            var _score = $('#score').val(),
+                _text = $('#text').val(),
+                _id = currentId;
+                 $.ajax({
+                    url: '/admin/send',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        'id': _id,
+                        'score': _score,
+                        'text': _text
+                    }
+                })
+                .done(function(data) {
+                    if(data.satus==200) {
+                            $(".alert-box").slideUp(400);
+                    }
+                })
         })
 
         //关闭评分框
@@ -267,12 +319,25 @@
             if($(this).parent().siblings('.text').html() == '未签到'){
                 return;
             }
+            var id = $(this).parents('tr').attr("dataid");
+            var score = golddata[id].score;
+            var info = golddata[id].info;
+            var scoretext = golddata[id].scoretext;
+            if(scoretext=="") {
+                $(".beizhucontent").text("尚未面试")
+            }else {
+                 $(".beizhucontent").text(scoretext)
+            }
+            if(score==0) {
+                $(".resbox").text("尚未面试")
+            }else {
+                 $(".resbox").text(score)
+            }
             $(".alert-box-1").slideDown(400);
         })
 
         //关闭查看结果
         $('.alert-box-1').on('click','#btn-close',function () {
-            console.log(213)
             $(".alert-box-1").slideUp(400);
         })
     })

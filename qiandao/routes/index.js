@@ -477,7 +477,17 @@ router.get('/adminpage', function(req, res, next) {
   }
 });
 
+/*获取所有信息数据*/
+router.get('/adminpagedata', function(req, res, next) {
+  if(!req.session.username) {
+  	 res.render('admin');
+  }else {
+  	 res.json({alldata: golddata});
+  }
+});
+
 /*更改评分数据*/
+
 router.post('/admin/send', function(req, res, next) {
 	  if(!req.session.username) {
 	  	 res.json({'satus':100});
