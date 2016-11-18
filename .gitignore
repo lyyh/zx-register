@@ -1,4 +1,25 @@
 ## 忽略文件
-test
-node_modulue
-dist
+test/
+node_modulue/
+dist/
+
+*.class
+
+# Package Files #
+*.war
+*.ear
+*.iml
+*.idea/
+
+
+target/
+out/
+UI.iml
+
+bin/
+build/
+
+bower_components/
+
+.DS_Store
+*.log
