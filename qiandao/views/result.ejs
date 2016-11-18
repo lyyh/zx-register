@@ -43,16 +43,15 @@
             top: 0px;
             left: 0px;
             z-index: 11;
-            display: none;
+            /*display: none;*/
         }
         .alert-wrap {
-            height: 180px;
-            border-radius: 10%;
+            border-radius: 20px;
             border: 2px solid #00B38C;
-            box-shadow: 0 0 5px 1px #00B38C;
+            box-shadow: 0 0 10px 1px #00B38C;
             padding: 20px;
             transform:scale(0);
-            width:50%;
+            width:90%;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -67,25 +66,27 @@
         }
         .score-hd{
             overflow: hidden;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
         }
         .score-hd input{
-            height: 50px;
-            line-height: 50px;
-            width: 70%;
-            font-size: 30px;
-            outline: none;
-            float: left;
-            text-align: center;
-            border-radius: 20%;
-        }
-        .score-hd p{
-            line-height: 50px;
+            height: 40px;
+            line-height: 40px;
+            width: 60%;
             float: right;
+            font-size: 24px;
+            outline: none;
+            border: none;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .score-hd span{
+            line-height: 40px;
+            float: left;
             margin-top: 0px;
             font-size: 30px;
             color: #0080b3;
             text-align: center;
+            font-weight: bolder;
         }
         .btnqiandao,.btnpinglun{
             position: relative;
@@ -125,6 +126,23 @@
             font-size: 25px;
             border:1px solid #ffd85f;
         }
+        .comment span{
+            float: left;
+            font-size: 30px;
+            color: #0080b3;
+            font-weight: bolder;
+        }
+        .comment textarea{
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            font-size: 24px;
+            height: 200px;
+        }
+        .comment{
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
@@ -140,7 +158,7 @@
         <%for(var i=0; i<alldata.length;i++){
         if(alldata[i].status==-1){
         %>
-        <tr dataid = <%= i%>>n
+        <tr dataid = <%= i%>>
             <td><%= i%></td>
             <td><%= alldata[i].name%></td>
             <td class="text">未签到</td>
@@ -179,9 +197,13 @@
 <div class="alert-box">
     <div class="alert-wrap alert_ok">
            <div class="score-hd">
+               <span>分数:</span>
                <input type="text" id="score" maxlength="3">
-               <p>分</p>
            </div>
+            <div class="comment">
+                <span>评语:</span>
+                <textarea name="" id="" cols="30" rows="10"></textarea>
+            </div>
             <div class="btn-score">
                 提交
             </div>
