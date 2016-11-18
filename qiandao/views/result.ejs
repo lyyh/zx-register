@@ -144,7 +144,7 @@
         .comment{
             margin-bottom: 15px;
         }
-        .score-title{
+        .score-close{
             position: relative;
             top: 0;
             right: -10px;
@@ -152,7 +152,7 @@
             color: #ddd;
             font-size: 22px;
         }
-        .score-title span{
+        .score-close span{
             float: right;
         }
     </style>
@@ -208,7 +208,7 @@
 </div>
 <div class="alert-box">
     <div class="alert-wrap alert_ok">
-           <div class="score-title"><span>X</span></div>
+           <div class="score-close"><span>X</span></div>
            <div class="score-hd">
                <span>分数:</span>
                <input type="text" id="score" maxlength="3">
@@ -222,10 +222,6 @@
             </div>
     </div>
 </div>
-<!--<div class="alert-box-1">-->
-    <!--<div class="alert-wrap-1">-->
-    <!--</div>-->
-<!--</div>-->
 <div class="footer">
     2016-11-19@版权所有-树莓fe
 </div>
@@ -234,13 +230,18 @@
 
     $(function(){
 
-        //打分
+        //打开评分框
         $(".table").on("click",".btnqiandao",function(){
 
             if($(this).parent().siblings('.text').html() == '未签到'){
                return;
             }
             $(".alert-box").slideDown(400);
+        })
+
+        //关闭评分框
+        $('.alert-box').on('click','.score-close',function () {
+            $(".alert-box").slideUp(400);
         })
 
         //评论
