@@ -12,21 +12,21 @@ global.golddata = [
 		"evaluatename": "",
 		"scoretext":"",
 		"score": 0,
-		"info":"很跳的,重点处理一下"
+		"info":""
 	},{
 		"name":"董秋悦",
 		"status": -1,
 		"scoretext":"",
 		"evaluatename": "",
 		"score": 0,
-		"info":"跳的，但是好看"
+		"info":""
 	},{
 		"name":"高梦云",
 		"status": -1,
 		"scoretext":"",
 		"evaluatename": "",
 		"score": 0,
-		"info":"特殊面"
+		"info":""
 	},{
 		"name":"任梦",
 		"status": -1,
@@ -55,7 +55,7 @@ global.golddata = [
 		"scoretext":"",
 		"evaluatename": "",
 		"score": 0,
-		"info":"封传梼推荐,尽量被挂了"
+		"info":""
 	},{
 		"name":"匡俊嘉",
 		"status": -1,
@@ -125,21 +125,21 @@ global.golddata = [
 		"evaluatename": "",
 		"score": 0,
 		"scoretext":"",
-		"info":"李梦雪和周维玮唯一传人"
+		"info":""
 	},{
 		"name":"郑思成",
 		"status": -1,
 		"evaluatename": "",
 		"score": 0,
 		"scoretext":"",
-		"info":"(帅） ydt"
+		"info":"("
 	},{
 		"name":"朱凯军",
 		"status": -1,
 		"evaluatename": "",
 		"score": 0,
 		"scoretext":"",
-		"info":"（帅） lmx"
+		"info":""
 	},{
 		"name":"吴君涛",
 		"status": -1,
@@ -224,7 +224,7 @@ global.golddata = [
 		"scoretext":"",
 		"evaluatename": "",
 		"score": 0,
-		"info":"（漂亮的 挂了吧，事情太多了"
+		"info":""
 	},{
 		"name":"杨一伦",
 		"status": -1,
@@ -336,7 +336,7 @@ global.golddata = [
 		"scoretext":"",
 		"evaluatename": "",
 		"score": 0,
-		"info":"(切图还行可以考虑一下)"
+		"info":""
 	},{
 		"name":"王悦",
 		"status": -1,
@@ -385,21 +385,21 @@ global.golddata = [
 		"scoretext":"",
 		"evaluatename": "",
 		"score": 0,
-		"info":"漂亮"
+		"info":""
 	},{
 		"name":"陈颖",
 		"status": -1,
 		"scoretext":"",
 		"evaluatename": "",
 		"score": 0,
-		"info":"刘雁豪单面"
+		"info":""
 	},{
 		"name":"黄涛",
 		"status": -1,
 		"scoretext":"",
 		"evaluatename": "",
 		"score": 0,
-		"info":"明亮单面"
+		"info":""
 	},{
 		"name":"王倩",
 		"scoretext":"",
@@ -427,7 +427,7 @@ global.golddata = [
 		"scoretext":"",
 		"evaluatename": "",
 		"score": 0,
-		"info":"跳的，相当跳的"
+		"info":""
 	},{
 		"name":"杨翼飞",
 		"status": -1,
